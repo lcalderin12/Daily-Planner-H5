@@ -12,16 +12,22 @@ var realTime = ["09:00:00","10:00:00", "11:00:00", "12:00:00", "13:00:00",  "14:
 var plannerParts = [];
 var getLocalStorageData = JSON.parse(localStorage.getItem("plannerTasks"));
 
-if (getLocalStorageData !== null) {
-    plannerParts = getLocalStorageData;
-   }
+plannerParts = getLocalStorageData;
+
 
 for(var i = 0; i<hourID.length; i++){
     var time = $(hourID[i]);
     var idButton = time.parent().parent().find("button"); //finds the button corresponding to loop id
 
+
     if ((moment().format('MMMM Do YYYY, HH:mm:ss')) < (moment().format('MMMM Do YYYY') +  ", " + realTime[i])) { 
         time.attr("class", "future");
+        //sets the value for the local variable
+        plannerParts.forEach(function(part){
+            if (hourID[i] === ("#" + (part["input-id"]))){
+                time.val(part["input-value"]);
+            }
+        })
 
     } else{
         if ((moment().format('MMMM Do YYYY, HH:mm:ss')) >= (moment().format('MMMM Do YYYY')+ ", " + realTime[i])) {
