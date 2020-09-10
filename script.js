@@ -23,7 +23,12 @@ for(var i = 0; i<hourID.length; i++){
     if ((moment().format('MMMM Do YYYY, HH:mm:ss')) < (moment().format('MMMM Do YYYY') +  ", " + realTime[i])) { 
         time.attr("class", "future");
 
-    } 
+    } else{
+        if ((moment().format('MMMM Do YYYY, HH:mm:ss')) >= (moment().format('MMMM Do YYYY')+ ", " + realTime[i])) {
+        time.attr("class", "past"); //gives attibutes associated with the past class in css
+        $(".past").attr("disabled", "disabled"); //prevents writting text
+        }
+    }
 
  };
 
